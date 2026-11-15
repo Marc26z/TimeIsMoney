@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>TimeIsMoney — What does it cost in hours?</title>
+  <meta name="description" content="Turn any price into hours of work at the U.S. median wage, using the latest data from the Bureau of Labor Statistics.">
+  <meta name="theme-color" content="#f1ecdf">
+  <meta name="color-scheme" content="light">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="TimeIsMoney">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none';">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="TimeIsMoney home">
+        <span class="brand-mark" aria-hidden="true">$</span>
+        <span class="brand-name">TimeIsMoney</span>
+      </a>
+      <button class="install-btn" id="install-btn" type="button" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3v11m0 0 4-4m-4 4-4-4"></path>
+          <path d="M5 19h14"></path>
+        </svg>
+        <span>Install</span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow"><span class="eyebrow-dot"></span>The real price</p>
+        <h1>What does it<br>really <em>cost?</em></h1>
+        <p class="lede">
+          Type a price. See how many hours of work it takes to earn it at the
+          median U.S. full-time wage.
+        </p>
+      </section>
+
+      <section class="calculator" aria-labelledby="price-label">
+        <div class="field-heading">
+          <label id="price-label" for="price">Price</label>
+          <button class="example-btn" id="example-btn" type="button">Try $200.45</button>
+        </div>
+
+        <div class="price-field">
+          <span class="currency" aria-hidden="true">$</span>
+          <input
+            id="price"
+            name="price"
+            type="text"
+            inputmode="decimal"
+            enterkeyhint="done"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="200.45"
+            aria-describedby="input-hint"
+          >
+          <button class="clear-btn" id="clear-btn" type="button" aria-label="Clear price" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18"></path>
+            </svg>
+          </button>
+        </div>
+        <p class="input-hint" id="input-hint">Dollars and cents. No sign-up, no math.</p>
+
+        <div class="result" id="result" data-state="empty">
+          <div class="result-heading">
+            <span class="result-label">Hours of work</span>
+            <span class="rate-pill" id="rate-pill">$30.80/hr</span>
+          </div>
+
+          <output class="result-time" id="result-time" for="price" aria-live="polite" aria-atomic="true">
+            <span id="result-hours">0</span><span class="unit">h</span>
+            <span id="result-minutes">00</span><span class="unit">m</span>
+          </output>
+
+          <p class="result-note" id="result-note">Enter a price to see the hours.</p>
+
+          <dl class="mini-stats">
+            <div>
+              <dt>Decimal hours</dt>
+              <dd id="stat-decimal">—</dd>
+            </div>
+            <div>
+              <dt>8-hour days</dt>
+              <dd id="stat-days">—</dd>
+            </div>
+            <div>
+              <dt>40-hour weeks</dt>
+              <dd id="stat-weeks">—</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="benchmark" aria-labelledby="benchmark-title">
+        <div class="benchmark-heading">
+          <p class="section-kicker">Based on</p>
+          <h2 id="benchmark-title">The median U.S. paycheck</h2>
+        </div>
+
+        <div class="equation" aria-label="Median weekly earnings divided by 40 hours equals the hourly rate">
+          <div class="equation-item">
+            <strong id="bench-weekly">$1,232</strong>
+            <span>weekly</span>
+          </div>
+          <span class="operator" aria-hidden="true">÷</span>
+          <div class="equation-item">
+            <strong>40</strong>
+            <span>hours</span>
+          </div>
+          <span class="operator" aria-hidden="true">=</span>
+          <div class="equation-item is-accent">
+            <strong id="bench-hourly">$30.80</strong>
+            <span>per hour</span>
+          </div>
+        </div>
+
+        <p class="benchmark-copy" id="benchmark-copy">
+          Median usual weekly earnings of full-time wage and salary workers,
+          <span id="bench-period">Q3 2026</span>, before taxes.
+        </p>
+      </section>
+
+      <details class="method">
+        <summary>
+          <span>How this is calculated</span>
+          <span class="summary-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="method-body">
+          <p>
+            The U.S. Bureau of Labor Statistics reports <strong id="method-weekly">$1,232</strong>
+            as the median usual weekly earnings of full-time wage and salary
+            workers in <span id="method-period">Q3 2026</span>. Dividing that by a
+            40-hour week gives <strong id="method-hourly">$30.80</strong> per hour.
+          </p>
+          <p>
+            The app divides the price you enter by that hourly figure. The result
+            is rounded to the nearest minute.
+          </p>
+          <ul>
+            <li>Earnings are gross pay, before taxes and other deductions. Take-home pay may be lower, so the real cost in hours could be higher.</li>
+            <li>BLS defines full-time as 35 hours or more per week; this app uses a standard 40-hour week for the hourly conversion.</li>
+            <li>The figure covers wage and salary workers nationally. It excludes self-employed workers and is not a personal salary estimate.</li>
+          </ul>
+          <p class="privacy-note">Your price never leaves this device, and the app works offline.</p>
+          <p class="source-links">
+            <a href="https://www.bls.gov/news.release/wkyeng.htm" target="_blank" rel="noopener noreferrer">Read the BLS release</a>
+            <a href="https://data.bls.gov/timeseries/LEU0252881500" target="_blank" rel="noopener noreferrer">View the series</a>
+          </p>
+          <p class="source-meta">BLS release: <span id="release-date">Oct 21, 2026</span></p>
+        </div>
+      </details>
+    </main>
+
+    <footer class="footer">
+      <span>Source: U.S. Bureau of Labor Statistics</span>
+      <span>Updated <span id="updated-date">Nov 15, 2026</span></span>
+    </footer>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

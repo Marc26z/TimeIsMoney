@@ -1,0 +1,19 @@
+{
+  "name": "timeismoney",
+  "version": "0.01",
+  "description": "Turn any price into hours of work at the U.S. median wage. PWA and Android app.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs",
+    "test": "node --test --test-force-exit test/*.test.mjs",
+    "apk": "bash scripts/build-apk.sh",
+    "update-data": "node scripts/update-bls.mjs",
+    "icons": "bash scripts/make-icons.sh"
+  },
+  "devDependencies": {
+    "jsdom": "^31.0.1"
+  }
+}

@@ -2,6 +2,7 @@ import { BLS } from "./data.js";
 
 export const HOURS_PER_WORKDAY = 8;
 export const HOURS_PER_WORKWEEK = 40;
+export const HOURS_PER_WORKYEAR = HOURS_PER_WORKWEEK * 52;
 
 const decimal = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
@@ -16,6 +17,11 @@ const oneDecimal = new Intl.NumberFormat("en-US", {
 const twoDecimals = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
+});
+
+const threeDecimals = new Intl.NumberFormat("en-US", {
+  minimumFractionDigits: 3,
+  maximumFractionDigits: 3,
 });
 
 const whole = new Intl.NumberFormat("en-US", {
@@ -110,6 +116,12 @@ export function formatWorkweeks(hours) {
   return twoDecimals.format(weeks);
 }
 
+export function formatWorkyears(hours) {
+  const years = hours / HOURS_PER_WORKYEAR;
+  if (years > 0 && years < 0.0005) return "<0.001";
+  return threeDecimals.format(years);
+}
+
 export function formatWeeklyEarnings(data = BLS) {
   return wholeCurrency.format(data.weeklyEarnings);
 }
@@ -130,5 +142,6 @@ export function resultForPrice(price, data = BLS) {
     decimalHours: formatDecimalHours(hours),
     workdays: formatWorkdays(hours),
     workweeks: formatWorkweeks(hours),
+    workyears: formatWorkyears(hours),
   };
 }

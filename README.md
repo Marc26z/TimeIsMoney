@@ -27,7 +27,8 @@ price ÷ (weekly median earnings ÷ 40 hours)
 ```
 
 The headline duration is rounded to the nearest minute. The app also shows
-decimal hours, 8-hour workdays and 40-hour workweeks.
+decimal hours, 8-hour workdays, 40-hour workweeks and years of full-time work
+(counting a full-time year as 2,080 hours).
 
 ## Data source
 

@@ -38,6 +38,7 @@ test("entering $200.45 shows 6h 30m", () => {
   assert.equal(window.document.getElementById("stat-decimal").textContent, "6.51 h");
   assert.equal(window.document.getElementById("stat-days").textContent, "0.8");
   assert.equal(window.document.getElementById("stat-weeks").textContent, "0.16");
+  assert.equal(window.document.getElementById("stat-years").textContent, "0.003");
   assert.equal(
     window.document.getElementById("result-note").textContent,
     "About 6 hours and 30 minutes of gross pay.",

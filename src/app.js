@@ -77,6 +77,7 @@ export function initApp(doc = document) {
   const statDecimal = doc.getElementById("stat-decimal");
   const statDays = doc.getElementById("stat-days");
   const statWeeks = doc.getElementById("stat-weeks");
+  const statYears = doc.getElementById("stat-years");
   const hint = doc.getElementById("input-hint");
 
   if (!input || !result || !resultTime || !resultHours || !resultMinutes) {
@@ -103,6 +104,7 @@ export function initApp(doc = document) {
     if (statDecimal) statDecimal.textContent = "—";
     if (statDays) statDays.textContent = "—";
     if (statWeeks) statWeeks.textContent = "—";
+    if (statYears) statYears.textContent = "—";
     if (clearButton) clearButton.hidden = true;
     setHint(defaultHint);
   }
@@ -117,6 +119,7 @@ export function initApp(doc = document) {
     if (statDecimal) statDecimal.textContent = "—";
     if (statDays) statDays.textContent = "—";
     if (statWeeks) statWeeks.textContent = "—";
+    if (statYears) statYears.textContent = "—";
     if (clearButton) clearButton.hidden = false;
     setHint("Use a number, like 200.45.", true);
   }
@@ -128,7 +131,7 @@ export function initApp(doc = document) {
       return;
     }
 
-    const { parts, decimalHours, workdays, workweeks } = calculated;
+    const { parts, decimalHours, workdays, workweeks, workyears } = calculated;
     const hoursText = integer.format(parts.hours);
     const timeLength = hoursText.length + 4;
     result.dataset.state = "valid";
@@ -148,6 +151,7 @@ export function initApp(doc = document) {
     if (statDecimal) statDecimal.textContent = `${decimalHours} h`;
     if (statDays) statDays.textContent = workdays;
     if (statWeeks) statWeeks.textContent = workweeks;
+    if (statYears) statYears.textContent = workyears;
     if (clearButton) clearButton.hidden = input.value.length === 0;
     setHint(defaultHint);
   }

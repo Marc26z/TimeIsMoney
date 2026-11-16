@@ -8,6 +8,7 @@ import {
   formatPrice,
   formatRate,
   formatWeeklyEarnings,
+  formatWorkyears,
   hourlyRate,
   parsePrice,
   priceToHours,
@@ -77,6 +78,9 @@ test("resultForPrice produces display-ready fields", () => {
   assert.equal(result.decimalHours, "6.51");
   assert.equal(result.workdays, "0.8");
   assert.equal(result.workweeks, "0.16");
+  assert.equal(result.workyears, "0.003");
+  assert.equal(formatWorkyears(3120), "1.500");
+  assert.equal(formatWorkyears(0.5), "<0.001");
   assert.equal(formatPrice(200.45), "$200.45");
 });
 
@@ -86,4 +90,5 @@ test("zero has a clean result", () => {
   assert.equal(formatDuration(0), "0h 00m");
   assert.equal(result.workdays, "0.0");
   assert.equal(result.workweeks, "0.00");
+  assert.equal(result.workyears, "0.000");
 });
